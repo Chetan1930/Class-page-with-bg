@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Platform</title>
+  <style>
+    /* Reset styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96E6A1);
+      background-size: 400% 400%;
+      animation: gradientBackground 15s ease infinite;
+      color: #fff;
+      position: relative;
+    }
+
+    /* Navbar styling with animation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: linear-gradient(90deg, #2c3e50, #3498db, #2c3e50);
+      background-size: 200% 100%;
+      animation: gradientSlide 10s ease infinite;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    }
+
+    .navbar .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .navbar .logo::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #fff;
+      transform: translateX(-100%);
+      animation: slideLine 3s infinite;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .navbar .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: #fff;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      transform-origin: right;
+    }
+
+    .navbar .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Heading with enhanced animation */
+    .heading {
+      text-align: center;
+      margin: 40px 0;
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      animation: fadeIn 2s ease-in forwards;
+      position: relative;
+    }
+
+    .heading::before,
+    .heading::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 2px;
+      background: #fff;
+      top: 50%;
+      transform: translateY(-50%);
+      animation: expandLine 2s ease-in-out infinite;
+    }
+
+    .heading::before {
+      right: 100%;
+      margin-right: 20px;
+    }
+
+    .heading::after {
+      left: 100%;
+      margin-left: 20px;
+    }
+
+    .heading .learn {
+      display: inline-block;
+      animation: colorChange 3s linear infinite;
+      position: relative;
+    }
+
+    /* Cards section */
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 30px auto;
+      padding: 0 20px;
+      max-width: 1200px;
+    }
+
+    .card {
+      flex: 0 1 350px;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .card img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card div {
+      color: white;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* Footer with animation */
+    .footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 15px;
+      background: linear-gradient(90deg, #2c3e50, #3498db, #2c3e50);
+      background-size: 200% 100%;
+      animation: gradientSlide 10s ease infinite;
+      color: #fff;
+      position: sticky;
+      bottom: 0;
+      z-index: 1000;
+      box-shadow: 0 -2px 20px rgba(0,0,0,0.2);
+    }
+
+    .footer::before {
+      content: '♦';
+      animation: spin 3s linear infinite;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    .footer::after {
+      content: '♦';
+      animation: spin 3s linear infinite;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    /* Animations */
+    @keyframes gradientBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes gradientSlide {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes slideLine {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes expandLine {
+      0% { width: 0; opacity: 0; }
+      50% { width: 50px; opacity: 1; }
+      100% { width: 0; opacity: 0; }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes colorChange {
+      0% { color: #FF6B6B; }
+      25% { color: #4ECDC4; }
+      50% { color: #45B7D1; }
+      75% { color: #96E6A1; }
+      100% { color: #FF6B6B; }
+    }
+
+    /* Media Queries */
+    @media (max-width: 900px) {
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 100%;
+        max-width: 350px;
+      }
+      .heading::before,
+      .heading::after {
+        width: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Chetan Chauhan</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Contact</a>
+      <a href="#">About Us</a>
+    </div>
+  </nav>
+
+  <!-- Heading with Color-Changing Word -->
+  <div class="heading">
+    What do you want to <span class="learn">Learn</span> today?
+  </div>
+
+ <!-- Cards Section -->
+<div class="cards">
+  <a href="#####" class="card">
+    <img src="https://c8.alamy.com/comp/2B9TJPC/vector-black-line-concept-of-internet-technology-dbms-2B9TJPC.jpg" alt="DBMS Image">
+    <div>DBMS</div>
+  </a>
+  <a href="#####" class="card">
+    <img src="https://media.istockphoto.com/id/147480805/photo/oop-object-oriented-programming.jpg?s=612x612&w=0&k=20&c=r47EPdaimqTUmRu4Pne6jJyi95NPWDJU3IsPW1sAPec=" alt="OOPS Image">
+    <div>OOPS</div>
+  </a>
+  <a href="#####" class="card">
+    <img src="https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/machine-learning-pillar-page-overview.jpeg" alt="ML Image">
+    <div>ML</div>
+  </a>
+</div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    All rights reserved © Chetan Chauhan
+  </footer>
+
+</body>
+</html>
